@@ -1,0 +1,34 @@
+---
+
+- name: Add servers - netscaler_server
+  tags:
+    - test1
+  delegate_to: localhost
+  netscaler_server:
+    nsip: "{{ ns_ip }}"
+    validate_certs: no
+    nitro_user: "{{ ns_user }}"
+    nitro_pass: "{{ ns_pass }}"
+    state: present
+
+    name: "{{ item.name }}"
+    ipaddress: "{{ item.ipaddress }}"
+  with_items: "{{ servers.server }}"
+
+
+- name: Add servers - uri
+  delegate_to: localhost
+  tags:
+    - test2
+  uri:
+    url: "http://{{ ns_ip }}/nitro/v1/config/server?action=add"
+    method: POST
+    status_code: 200,201,409
+    return_content: yes
+    headers:
+      X-NITRO-USER: "{{ ns_user }}"
+      X-NITRO-PASS: "{{ ns_pass }}"
+    body_format: json
+    body: '{"server": {{ item | to_json }} }'
+  register: add_servers
+  with_items: "{{ servers.server }}"

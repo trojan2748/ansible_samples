@@ -1,0 +1,17 @@
+---
+
+
+ns_ip: 10.1.3.205
+ns_user: nsroot
+ns_pass: nsroot
+
+servers:
+  server:
+    - name: SERVER_1
+      ipaddress: 10.1.1.1
+    - name: SERVER_2
+      ipaddress: 10.1.1.2
+    - name: SERVER_3
+      ipaddress: 10.1.1.3
+    - name: SERVER_4
+      ipaddress: 10.1.1.4
