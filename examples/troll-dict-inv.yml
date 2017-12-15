@@ -1,0 +1,15 @@
+all:
+  hosts:
+    host1:
+      ansible_host: 10.1.3.69
+      vgs:
+        VG-CFME:
+          free_g: '4.00'
+          num_lvs: '9'
+          num_pvs: '1'
+          size_g: '39.50'
+        vg_cf_logs:
+          free_g: '0'
+          num_lvs: '1'
+          num_pvs: '1'
+          size_g: '80.00'

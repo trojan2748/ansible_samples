@@ -1,0 +1,34 @@
+---
+
+- name: Get all
+  tags:
+    - test1
+  debug:
+    msg: "{{ item.key}}:{{ item.value }}"
+  with_dict: "{{ vgs }}"
+
+
+- name: Get free_g
+  tags:
+    - test2
+  debug:
+    msg: "{{ item.key }}:{{ item.value.free_g }}"
+  with_dict: "{{ vgs }}"
+
+
+- name: Get free_g when not 0
+  tags:
+    - test3
+  debug:
+    msg: "{{ item.key }}:{{ item.value.free_g }}"
+  with_dict: "{{ vgs }}"
+  when: "{{ item.value.free_g }} != 0"
+
+
+- name: Get free_g when not 0
+  tags:
+    - test4
+  debug:
+    msg: "{{ item.key }}:{{ item.value.free_g }}"
+  with_dict: "{{ vgs }}"
+  when:  item.value.free_g != "0"
