@@ -2,39 +2,39 @@ all:
   hosts:
     host1:
       ansible_host: 10.1.3.69
+      ansible_hostname: host1
       vgs:
-        VG-CFME:
-          free_g: '4.00'
+        VG1_1:
+          free_g: '11.00'
           num_lvs: '9'
           num_pvs: '1'
           size_g: '39.50'
-        vg_cf_logs:
+        VG1_2:
           free_g: '0'
           num_lvs: '1'
           num_pvs: '1'
           size_g: '80.00'
-        VG-CFME2:
-          free_g: '4.00'
+        VG1_3:
+          free_g: '13.00'
           num_lvs: '9'
           num_pvs: '1'
           size_g: '39.50'
     host2:
       ansible_host: 10.1.3.69
+      ansible_hostname: host2
       vgs:
-        VG-CFME2:
-          free_g: '4.00'
+        VG2_1:
+          free_g: '21.00'
           num_lvs: '9'
           num_pvs: '1'
           size_g: '39.50'
-        vg_cf_logs2:
+        VG2_2:
           free_g: '0'
           num_lvs: '1'
           num_pvs: '1'
           size_g: '80.00'
-        VG-CFME22:
-          free_g: '4.00'
+        VG2_3:
+          free_g: '23.00'
           num_lvs: '9'
           num_pvs: '1'
           size_g: '39.50'
-  vars:
-    free:
