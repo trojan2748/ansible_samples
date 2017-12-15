@@ -33,32 +33,20 @@
   with_dict: "{{ vgs }}"
   when:  item.value.free_g != "0"
 
-#- name: Initialize free
-#  tags:
-#    - test5
-#  set_fact:
-#    free: []
-      
 
 - name: Set fact when not 0
   tags:
     - test5
   set_fact:
-    free: "{{ free }} +  ['{{ item.key }}:{{item.value.free_g}}']"
+    free: "{{ free }} +  ['{{ ansible_hostname }}' {{ item.key }}:{{item.value.free_g}}']"
+    cacheable: true
   with_dict: "{{ vgs }}"
   when: item.value.free_g != "0"
   delegate_to: localhost
 
 
-- name: Print fact
+- name: Debug fact when not 0
   tags:
     - test5
   debug:
     msg: "{{ free }}"
-
-- name: Print fact
-  tags:
-    - test5
-  debug:
-    msg: "{{ free }}"
-  delegate_to: localhost
