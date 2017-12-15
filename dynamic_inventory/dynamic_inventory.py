@@ -175,7 +175,7 @@ def write(ss):
           for line in y.split("\n"):
             string += "        %s\n" % line
         else:
-          string += "        %s: %s\n" % (r[0], r[1])
+          string += "      %s: %s\n" % (r[0], r[1])
       output.write("%s" % (string))
     output.close()
   else:
