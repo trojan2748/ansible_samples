@@ -1,0 +1,18 @@
+---
+
+- name: Set lb-mon
+  delegate_to: localhost
+  netscaler_lb_monitor:
+    nsip: "{{ ns_ip }}"
+    validate_certs: no
+    nitro_user: "{{ ns_user }}"
+    nitro_pass: "{{ ns_pass }}"
+    state: present
+    monitorname: "{{ item.value[0].name }}"
+    type: "{{ item.value[0].type }}"
+    lrtm: "{{ item.value[0].lrtm | lower }}"
+    respcode: "{{ item.value[0].respCode }}"
+    httprequest: "{{ item.value[0].httpRequest }}"
+    resptimeout: "{{ item.value[0].resptimeout }}"
+    interval: "{{ item.value[0].interval }}"
+  with_dict: "{{ lbmons }}"

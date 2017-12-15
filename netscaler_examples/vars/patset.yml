@@ -1,0 +1,16 @@
+---
+
+patset:
+  PATSET_1:
+    - name: PATSET_1
+      String: /login.php
+    - name: PATSET_1
+      String: /register.php
+    - name: PATSET_1
+      String: /reset_password.php
+  PATSET_2:
+    - name: PATSET_2
+      String: /en/login
+    - name: PATSET_2
+      String: /de/login
+    

@@ -1,0 +1,27 @@
+---
+
+lbmons:
+  http-mon-1:
+    - name: http-mon-1
+      httpRequest: HEAD /site/info
+      interval: '12'
+      lrtm: DISABLED
+      respCode: '200'
+      resptimeout: '6'
+      type: HTTP
+  http-mon-2:
+    - name: http-mon-2
+      httpRequest: HEAD /logout/info
+      interval: '12'
+      lrtm: DISABLED
+      respCode: '200,301'
+      resptimeout: '6'
+      type: HTTP
+  http-mon-3:
+    - name: http-mon-3
+      httpRequest: HEAD /login/info
+      interval: '12'
+      lrtm: DISABLED
+      respCode: '200'
+      resptimeout: '6'
+      type: HTTP
