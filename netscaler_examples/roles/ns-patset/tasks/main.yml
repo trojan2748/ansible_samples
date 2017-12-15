@@ -1,0 +1,46 @@
+---
+
+- import_tasks: debug.yml
+  tags:
+    - debug
+
+
+- name: Create policypatset
+  delegate_to: localhost
+  tags:
+    - create
+    - test4
+  uri:
+    url: "http://{{ ns_ip }}/nitro/v1/config/policypatset/{{ item }}"
+    method: POST
+    status_code: 200,201,409
+    return_content: yes
+    headers:
+      X-NITRO-USER: "{{ ns_user }}"
+      X-NITRO-PASS: "{{ ns_pass }}"
+    body_format: json
+    body: '{"policypatset":{"name":"{{ item }}"} }'
+  register: create_policy_patset
+  with_items: "{{ patset }}"
+
+
+- name: Bind policypatset
+  delegate_to: localhost
+  tags:
+    - bind_patsets
+    - test5
+  uri:
+    url: "http://{{ ns_ip }}/nitro/v1/config/policypatset_pattern_binding/{{ item.key }}"
+    method: PUT
+    status_code: 200,599
+    return_content: yes
+    headers:
+      X-NITRO-USER: "{{ ns_user }}"
+      X-NITRO-PASS: "{{ ns_pass }}"
+    body_format: json
+    body: '{"policypatset_pattern_binding": {{ item.value | to_json }} }'
+  register: result
+  with_dict: "{{ patset }}"
+  when:  item.key == item.value[0].name 
+  ignore_errors: True
+
