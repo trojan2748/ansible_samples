@@ -1,7 +1,7 @@
 ---
 
 
-- name: Add servers - netscaler_server
+- name: Create servers (module)
   tags:
     - create_servers_module
     - module
@@ -18,7 +18,7 @@
   with_items: "{{ servers.server }}"
 
 
-- name: Add servers - uri
+- name: Create servers (uri)
   delegate_to: localhost
   tags:
     - create_servers_uri

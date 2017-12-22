@@ -57,6 +57,7 @@
   tags:
     - create_serviceGroup_uri
     - create_serviceGroup_module
+    - bind_serviceGroup_uri
     - uri
     - module
   delegate_to: localhost
