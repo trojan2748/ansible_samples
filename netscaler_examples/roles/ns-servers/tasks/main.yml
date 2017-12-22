@@ -1,8 +1,10 @@
 ---
 
+
 - name: Add servers - netscaler_server
   tags:
-    - test1
+    - create_servers_module
+    - module
   delegate_to: localhost
   netscaler_server:
     nsip: "{{ ns_ip }}"
@@ -19,16 +21,18 @@
 - name: Add servers - uri
   delegate_to: localhost
   tags:
-    - test2
+    - create_servers_uri
+    - uri
   uri:
     url: "http://{{ ns_ip }}/nitro/v1/config/server?action=add"
     method: POST
-    status_code: 200,201,409
+    status_code: 201, 599
     return_content: yes
     headers:
       X-NITRO-USER: "{{ ns_user }}"
       X-NITRO-PASS: "{{ ns_pass }}"
     body_format: json
-    body: '{"server": {{ item | to_json }} }'
+    body: '{"server": {{ item.value | to_json }} }'
   register: add_servers
-  with_items: "{{ servers.server }}"
+  with_dict: "{{ servers }}"
+  fail_when: "'already exists' not in add_servers.content"
